@@ -32,4 +32,11 @@ class RecordScoresTest < ActionDispatch::IntegrationTest
     assert_equal 'realtor', last_score.object_class
     assert_equal 2, last_score.object_id
   end
+
+  test "Handles missing params in the request" do
+    post scores_url, params: { score: { score: 2} }, as: :json
+
+    assert_equal({"touchpoint"=>["can't be blank"], "respondent_class"=>["can't be blank"], "respondent_id"=>["can't be blank"], "object_class"=>["can't be blank"], "object_id"=>["can't be blank"]}, response.parsed_body)
+    assert_response 422
+  end
 end
