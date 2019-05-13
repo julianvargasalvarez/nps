@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2019_05_13_002536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "scores", force: :cascade do |t|
+    t.integer "score"
+    t.string "touchpoint"
+    t.string "respondent_class"
+    t.integer "respondent_id"
+    t.string "object_class"
+    t.integer "object_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["touchpoint"], name: "index_scores_on_touchpoint"
+  end
 
 end
